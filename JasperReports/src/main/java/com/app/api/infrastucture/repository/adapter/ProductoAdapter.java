@@ -78,7 +78,8 @@ public class ProductoAdapter implements ProductoService {
 	public String exportReport() throws FileNotFoundException, JRException {
 
 		List<ProductoDto> productos = productoRepository.findAll(Sort.by(Sort.Direction.ASC, "nombre"));
-		String path = "C:\\Users\\ID_0012\\Documents\\Github\\jasper-microservice-reports\\Reports";
+
+		String path = "src\\main\\resources\\static";
 
 		File file = ResourceUtils.getFile("src\\main\\resources\\products_report.jrxml");
 
@@ -88,6 +89,7 @@ public class ProductoAdapter implements ProductoService {
 
 		Map<String, Object> parameter = new HashMap<>();
 		parameter.put("createdBy", "Jhooomn");
+
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameter, dataSource);
 
 		JasperExportManager.exportReportToPdfFile(jasperPrint, path + "\\report.pdf");
