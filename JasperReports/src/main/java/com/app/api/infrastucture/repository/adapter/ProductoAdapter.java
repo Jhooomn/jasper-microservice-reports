@@ -9,6 +9,7 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
@@ -74,24 +75,43 @@ public class ProductoAdapter implements ProductoService {
 	}
 
 	@Override
-	public String exportReport() throws FileNotFoundException, JRException {
+	public String exportGeneralReport() throws FileNotFoundException, JRException {
 
-		List<ProductoDto> productos = productoRepository.findAll();
-		String path = "C:\\Users\\ID_0012\\Documents\\Github\\jasper-microservice-reports\\Reports";
+		boolean status = saveThePdf(productoRepository.findAll(Sort.by(Sort.Direction.ASC, "nombre")));
+		if (status) {
+			return "report has been generated";
+		} else {
+			return "Oops, got a problem...";
+		}
+	}
+
+	@Override
+	public String exportListReport(List<String> codigos) throws FileNotFoundException, JRException {
+
+		boolean status = saveThePdf(productoRepository.findProductosByIdList(codigos));
+		if (status) {
+			return "report has been generated";
+		} else {
+			return "Oops, got a problem...";
+		}
+	}
+
+	private Boolean saveThePdf(List<ProductoDto> list) throws FileNotFoundException, JRException {
+		String path = "src\\main\\resources\\static";
 
 		File file = ResourceUtils.getFile("src\\main\\resources\\products_report.jrxml");
 
 		JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
 
-		JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(productos);
+		JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(list);
 
 		Map<String, Object> parameter = new HashMap<>();
 		parameter.put("createdBy", "Jhooomn");
+
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameter, dataSource);
 
 		JasperExportManager.exportReportToPdfFile(jasperPrint, path + "\\report.pdf");
-
-		return "report has been generated";
+		return true;
 	}
 
 }

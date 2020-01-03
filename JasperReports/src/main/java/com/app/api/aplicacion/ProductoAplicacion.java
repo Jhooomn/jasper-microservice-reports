@@ -46,8 +46,12 @@ public class ProductoAplicacion {
 		productoService.editar(productoMapper.apitransformarDtoParaDominio(p));
 	}
 
-	public String exportReport() throws FileNotFoundException, JRException {
-		return productoService.exportReport();
+	public String exportGeneralReport() throws FileNotFoundException, JRException {
+		return productoService.exportGeneralReport();
 	}
 
+	public String exportListReport(List<String> codigos) throws FileNotFoundException, JRException {
+		return productoService.exportListReport(codigos);
+	}
+	
 }

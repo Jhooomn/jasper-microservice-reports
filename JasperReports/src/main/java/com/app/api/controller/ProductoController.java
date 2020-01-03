@@ -32,11 +32,17 @@ public class ProductoController {
 		return productoAplicacion.listar();
 	}
 
-	@GetMapping("/exportReport")
-	public String exportReport() throws FileNotFoundException, JRException {
-		return productoAplicacion.exportReport();
+	@GetMapping("/report/general")
+	public String exportGeneralReport() throws FileNotFoundException, JRException {
+		return productoAplicacion.exportGeneralReport();
 	}
-
+	
+	@PostMapping("/report/id_list")
+	public String exportListReport(@RequestBody List<String> codigos) throws FileNotFoundException, JRException {
+		return productoAplicacion.exportListReport(codigos);
+	}
+	
+	
 	@PostMapping
 	public void addProducto(@RequestBody ProductoRest producto) {
 		productoAplicacion.crear(producto);
