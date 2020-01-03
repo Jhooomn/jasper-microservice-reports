@@ -1,10 +1,13 @@
 package com.app.api.domain.services;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 
 import com.app.api.domain.model.Producto;
+
+import net.sf.jasperreports.engine.JRException;
 
 // Productos de dominio 
 @Component
@@ -20,4 +23,7 @@ public interface ProductoService {
 	public void eliminarPorId(String id);
 
 	public void editar(Producto producto);
+
+	public String exportReport() throws FileNotFoundException, JRException;
+
 }

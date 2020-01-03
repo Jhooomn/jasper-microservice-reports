@@ -1,5 +1,6 @@
 package com.app.api.aplicacion;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.UUID;
 
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.app.api.domain.services.ProductoService;
 import com.app.api.infrastucture.mapper.ProductoMapper;
 import com.app.api.infrastucture.rest.ProductoRest;
+
+import net.sf.jasperreports.engine.JRException;
 
 public class ProductoAplicacion {
 
@@ -41,6 +44,10 @@ public class ProductoAplicacion {
 
 	public void actualizar(ProductoRest p) {
 		productoService.editar(productoMapper.apitransformarDtoParaDominio(p));
+	}
+
+	public String exportReport() throws FileNotFoundException, JRException {
+		return productoService.exportReport();
 	}
 
 }
