@@ -1,14 +1,14 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="products_report" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="28f5b7f8-5867-484d-a763-db9f4ab81eb6">
 	<field name="id" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="ID"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="products"/>
 	</field>
 	<field name="nombre" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.label" value="Name"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="products"/>
 	</field>
 	<field name="valor" class="java.lang.Double">
-		<property name="com.jaspersoft.studio.field.label" value="valor"/>
+		<property name="com.jaspersoft.studio.field.label" value="Value"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="products"/>
 	</field>
 	<background>
@@ -50,7 +50,7 @@
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[id]]></text>
+				<text><![CDATA[ID]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="185" y="0" width="185" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="ac247dce-dbf2-4d81-94ce-5220c1981557">
@@ -59,7 +59,7 @@
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[nombre]]></text>
+				<text><![CDATA[NAME]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="370" y="0" width="185" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="ccedabb9-340b-4103-8236-c67fd17a0477">
@@ -68,7 +68,7 @@
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[valor]]></text>
+				<text><![CDATA[VALUE]]></text>
 			</staticText>
 		</band>
 	</columnHeader>

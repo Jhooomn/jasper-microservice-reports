@@ -8,4 +8,6 @@ import com.app.api.infrastucture.dto.ProductoDto;
 @Repository
 public interface ProductoRepository extends JpaRepository<ProductoDto, String> {
 
+	
+	
 }

@@ -9,6 +9,7 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
@@ -76,7 +77,7 @@ public class ProductoAdapter implements ProductoService {
 	@Override
 	public String exportReport() throws FileNotFoundException, JRException {
 
-		List<ProductoDto> productos = productoRepository.findAll();
+		List<ProductoDto> productos = productoRepository.findAll(Sort.by(Sort.Direction.ASC, "nombre"));
 		String path = "C:\\Users\\ID_0012\\Documents\\Github\\jasper-microservice-reports\\Reports";
 
 		File file = ResourceUtils.getFile("src\\main\\resources\\products_report.jrxml");
