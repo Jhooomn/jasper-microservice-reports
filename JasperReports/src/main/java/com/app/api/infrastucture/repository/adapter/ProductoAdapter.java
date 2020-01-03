@@ -75,17 +75,35 @@ public class ProductoAdapter implements ProductoService {
 	}
 
 	@Override
-	public String exportReport() throws FileNotFoundException, JRException {
+	public String exportGeneralReport() throws FileNotFoundException, JRException {
 
-		List<ProductoDto> productos = productoRepository.findAll(Sort.by(Sort.Direction.ASC, "nombre"));
+		boolean status = saveThePdf(productoRepository.findAll(Sort.by(Sort.Direction.ASC, "nombre")));
+		if (status) {
+			return "report has been generated";
+		} else {
+			return "Oops, got a problem...";
+		}
+	}
 
+	@Override
+	public String exportListReport(List<String> codigos) throws FileNotFoundException, JRException {
+
+		boolean status = saveThePdf(productoRepository.findProductosByIdList(codigos));
+		if (status) {
+			return "report has been generated";
+		} else {
+			return "Oops, got a problem...";
+		}
+	}
+
+	private Boolean saveThePdf(List<ProductoDto> list) throws FileNotFoundException, JRException {
 		String path = "src\\main\\resources\\static";
 
 		File file = ResourceUtils.getFile("src\\main\\resources\\products_report.jrxml");
 
 		JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
 
-		JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(productos);
+		JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(list);
 
 		Map<String, Object> parameter = new HashMap<>();
 		parameter.put("createdBy", "Jhooomn");
@@ -93,8 +111,7 @@ public class ProductoAdapter implements ProductoService {
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameter, dataSource);
 
 		JasperExportManager.exportReportToPdfFile(jasperPrint, path + "\\report.pdf");
-
-		return "report has been generated";
+		return true;
 	}
 
 }

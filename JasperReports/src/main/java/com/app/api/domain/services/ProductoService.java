@@ -24,6 +24,8 @@ public interface ProductoService {
 
 	public void editar(Producto producto);
 
-	public String exportReport() throws FileNotFoundException, JRException;
+	public String exportGeneralReport() throws FileNotFoundException, JRException;
+
+	public String exportListReport(List<String> codigos) throws FileNotFoundException, JRException;
 
 }
